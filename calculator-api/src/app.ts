@@ -12,17 +12,17 @@ require('dotenv').config()
 
 
 const app = express();
-app.set('trust proxy', true)
 app.use(json())
 app.use(cors())
 // routers
 app.use(authRouter);
 app.use(calculatorRouter);
 
+// when trying to get not configure routes throw Not found error
 app.get('*', async () => {
     throw new NotFoundError();
 })
-
+// error middleware
 app.use(errorHandler);
 
 export default app;
